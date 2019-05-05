@@ -19,19 +19,32 @@
 	</properties>
 
 	<dependencies>
+		<!--web模块依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!--与starter-test为创建项目时默认引用依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!--
+		添加devtools搭配plugins-maven-configuration-fork=true 实现热部署
+		在修改某些资源时,不需要触发重新启动,但会触发实时加载
+		双类加载机制,结合了通用Mapper可能会出现ClassCastException
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -40,6 +53,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
